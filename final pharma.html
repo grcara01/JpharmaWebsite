@@ -1,0 +1,1964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J.Care MedPartners | Pharmaceutical Distributor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0056b3;
+            --secondary: #003d7a;
+            --accent: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.logo i {
+    font-size: 2rem;
+    color: var(--accent);
+    margin-right: 15px;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.logo-name {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+        .logo-tagline {
+            font-size: 0.8rem;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-top: 3px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .search-box {
+            position: relative;
+        }
+        
+        .search-box input {
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            border: none;
+            outline: none;
+            width: 300px;
+            padding-right: 35px;
+        }
+        
+        .search-box i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+        
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+            z-index: 1000;
+        }
+        
+        .search-results.active {
+            display: block;
+        }
+        
+        .search-item {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .search-item:hover {
+            background: #f5f5f5;
+        }
+        
+        .search-item h4 {
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+        
+        .search-item p {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: var(--gray);
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close-btn:hover {
+            color: var(--dark);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+        }
+        
+        .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--secondary);
+        }
+        
+        /* Product detail styles */
+        .product-detail {
+            display: none;
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .product-detail.active {
+            display: block;
+        }
+        
+        .product-detail-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        .product-detail-img {
+            background-color: #f8f9fa;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+        
+        .product-detail-img i {
+            font-size: 8rem;
+            color: var(--primary);
+        }
+        
+        .product-detail-info h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .product-detail-info .manufacturer {
+            color: var(--gray);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        
+        .product-detail-info .description {
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .back-btn {
+            background-color: var(--gray);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 2rem;
+            transition: all 0.3s;
+        }
+        
+        .back-btn:hover {
+            background-color: #5a6268;
+        }
+        
+        /* Rest of your existing styles... */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3');
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 1rem;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #d62839;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+            margin-left: 1rem;
+        }
+        
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--primary);
+        }
+        
+        .about {
+            padding: 5rem 2rem;
+            background-color: white;
+        }
+        
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .about-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .about-content h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+        
+        .mission-vision {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .mission, .vision {
+            background-color: #f8f9fa;
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .mission h3, .vision h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .mission h3 i, .vision h3 i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+        
+        .core-values {
+            margin: 3rem 0;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .value-card {
+            background-color: white;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .value-card h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .value-card h4 i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+        
+        .products-services {
+            background-color: #f0f4f8;
+            padding: 5rem 2rem;
+        }
+        
+        .services-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .service-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.5rem;
+        }
+        
+        .service-card ul {
+            list-style-position: inside;
+            margin-left: 1rem;
+        }
+        
+        .service-card li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .history {
+            padding: 5rem 2rem;
+            background-color: white;
+        }
+        
+        .history-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .history-img {
+            background-color: #f0f0f0;
+            height: 400px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .target-market {
+            background-color: #f0f4f8;
+            padding: 5rem 2rem;
+        }
+        
+        .market-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .market-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .market-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .market-card i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        
+        .market-card h4 {
+            color: var(--primary);
+        }
+        
+        .products {
+            padding: 5rem 2rem;
+            background-color: white;
+        }
+        
+        .products-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .product-filters {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .filter-btn {
+            padding: 0.6rem 1.5rem;
+            background: none;
+            border: 2px solid var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--primary);
+            border-radius: 50px;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            border: 1px solid #eee;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            z-index: 1;
+        }
+        
+        .product-img {
+            height: 200px;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .product-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .product-info .manufacturer {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .request-quote {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .request-quote:hover {
+            background-color: var(--secondary);
+        }
+        
+        .partner-logos {
+            padding: 4rem 2rem;
+            background-color: #f0f4f8;
+            text-align: center;
+        }
+        
+        .logos-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+        }
+        
+        .logo-item {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        
+        .logo-item:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+        
+        .logo-item img {
+            max-height: 100%;
+            max-width: 150px;
+        }
+        
+        .contact-cta {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .contact-cta h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-cta p {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .footer-column .contact-info {
+            color: #adb5bd;
+        }
+        
+        .footer-column .contact-info i {
+            margin-right: 10px;
+            width: 20px;
+            color: var(--accent);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #adb5bd;
+            font-size: 0.9rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 992px) {
+            .history-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .history-img {
+                height: 300px;
+                order: -1;
+            }
+            
+            .mission-vision {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-detail-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                flex-direction: column;
+                width: 100%;
+            }
+        
+            .nav-links li {
+                margin: 0.5rem 0;
+                margin-left: 0;
+            }
+            
+            .search-box {
+                margin-top: 1rem;
+                width: 100%;
+            }
+            
+            .search-box input {
+                width: 100%;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            
+            .product-filters {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+   <header>
+    <div class="navbar">
+        <div class="logo">
+            <i class="fas fa-heartbeat"></i>
+            <div class="logo-text">
+                <span class="logo-name">J.CARE MEDPARTNERS</span>
+                <span class="logo-tagline">Pharmaceutical Distribution</span>
+            </div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#" class="nav-home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search products...">
+            <i class="fas fa-search"></i>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </div>
+</header>
+    
+    <main id="main-content">
+        <section class="hero">
+            <h1>Trusted Pharmaceutical Distribution</h1>
+            <p>Serving healthcare providers in Quezon City and across the Philippines with quality medicines and medical supplies since 2025.</p>
+            <div>
+                <button class="btn btn-primary" id="becomePartnerBtn">Become a Partner</button>
+                <button class="btn btn-outline" id="viewProductsBtn">View Products</button>
+            </div>
+        </section>
+        
+        <section class="about" id="about">
+            <div class="about-container">
+                <h2 class="section-title">About J.Care MedPartners</h2>
+                <div class="about-content">
+                    <p>J.CARE MEDPARTNERS PHARMA AND MEDICAL SUPPLIES DISTRIBUTION is a trusted and progressive distributor of pharmaceutical products and medical supplies based in Antipolo City, Philippines. We
+specialize in providing a broad range of quality-assured medicines and essential medical supplies to clinics, pharmacies, hospitals, and healthcare providers across the region.
+</p>
+                    
+                    <p>Founded by Ms. Patricia Nicole Francisco, a driven and service-oriented professional, the company is built on a strong foundation of integrity, industry expertise, and a commitment to excellence. J. CARE MEDPARTNERS bridges the gap between manufacturers and healthcare institutions, ensuring efficient, timely, and ethical distribution.</p>
+                    
+                    <div class="mission-vision">
+                        <div class="mission">
+                            <h3><i class="fas fa-bullseye"></i> Our Mission</h3>
+                            <p>Our mission is to To deliver reliable, accessible, and high-quality pharmaceutical and medical products that promote the health and well-being of individuals and communities—ensuring healthcare solutions are available wherever and whenever they are needed.</p>
+                        </div>
+                        <div class="vision">
+                            <h3><i class="fas fa-eye"></i> Our Vision</h3>
+                            <p>To become a leading pharmaceutical and medical supplies distributor in the Philippines, known for our quality, professionalism, and customer-first approach, while expanding our presence to meet the growing needs of the nation’s healthcare system.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="core-values">
+                        <h2>Our Core Values</h2>
+                        <div class="values-grid">
+                            <div class="value-card">
+                                <h4><i class="fas fa-shield-alt"></i> Integrity</h4>
+                                <p>We prioritize honesty, transparency, and ethical practices in all our dealings.</p>
+                            </div>
+                            <div class="value-card">
+                                <h4><i class="fas fa-award"></i> Quality</h4>
+                                <p>We are committed to providing only the best pharmaceutical products to our clients.</p>
+                            </div>
+
+                            <div class="value-card">
+                                <h4><i class="fas fa-star"></i> Excellence</h4>
+                                <p>We continually improve our services to ensure we meet industry standards and beyond.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="products-services" id="services">
+            <div class="services-container">
+                <h2 class="section-title">Products & Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <h3>Pharmaceutical Distribution</h3>
+                        <p>We offer a broad range of pharmaceutical products, including but not limited to:</p>
+                        <ul>
+                            <li>Parenteral Medicines</li>
+                            <li>Oral Medicines</li>
+                            <li>Brand Name Pharmaceuticals</li>
+                            <li>Generic Medications</li>
+                        </ul>
+                        <p>We ensure that our products meet the highest standards of safety, efficacy, and quality, sourced from reputable manufacturers.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Distribution Services</h3>
+                        <ul>
+                            <li>Reliable supply chain management</li>
+                            <li>Timely delivery to healthcare facilities</li>
+                            <li>Inventory management solutions</li>
+                            <li>Product information support</li>
+                            <li>Regulatory compliance assurance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="history">
+            <div class="history-container">
+                <div class="history-content">
+                    <h2 class="section-title">Our History</h2>
+                    <p>Founded in Antipolo City, J. CARE MEDPARTNERS PHARMA AND MEDICAL SUPPLIES DISTRIBUTION was born from the vision of Ms. Patricia Nicole Francisco—to establish a distribution company that prioritizes service quality, ethical business, and reliable delivery. </p>
+                    
+                    <p>Her background and dedication to healthcare logistics have enabled the company to build strong relationships with partners and clients alike.</p>
+                    
+                    <p>With a growing footprint and a passion for making a difference, J. CARE MEDPARTNERS continues to be a dependable name in the healthcare supply chain—committed to serving with heart, precision, and professionalism.</p>
+                </div>
+                <div class="history-img">
+                    <i class="fas fa-history"></i>
+                </div>
+            </div>
+        </section>
+        
+        <section class="target-market">
+            <div class="market-container">
+                <h2 class="section-title">Our Target Market</h2>
+                <p>Our products and services cater to a wide range of clients, including healthcare institutions, pharmacies, hospitals, clinics, and other healthcare providers that require a steady supply of high-quality pharmaceutical products.</p>
+                
+                <div class="market-grid">
+                    <div class="market-card">
+                        <i class="fas fa-hospital"></i>
+                        <h4>Hospitals</h4>
+                    </div>
+                    <div class="market-card">
+                        <i class="fas fa-clinic-medical"></i>
+                        <h4>Clinics</h4>
+                    </div>
+                    <div class="market-card">
+                        <i class="fas fa-prescription-bottle-alt"></i>
+                        <h4>Pharmacies</h4>
+                    </div>
+                    <div class="market-card">
+                        <i class="fas fa-user-md"></i>
+                        <h4>Healthcare Providers</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="products" id="products">
+            <div class="products-container">
+                <h2 class="section-title">Our Product Portfolio</h2>
+                
+                <div class="product-filters">
+                    <button class="filter-btn active" data-filter="all">All Products</button>
+                    <button class="filter-btn" data-filter="pharmaceuticals">Pharmaceuticals</button>
+                    <button class="filter-btn" data-filter="equipment">Medical Equipment</button>
+                    <button class="filter-btn" data-filter="consumables">Medical Consumables</button>
+                </div>
+                
+                <div class="product-grid">
+                    <!-- Product 1 -->
+                    <div class="product-card" data-category="pharmaceuticals" data-id="atorvastatin">
+                        <div class="product-badge">Rx</div>
+                        <div class="product-img">
+                            <i class="fas fa-pills" style="font-size: 4rem; color: var(--primary);"></i>
+                        </div>
+                        <div class="product-info">
+                            <h3>Atorvastatin Calcium</h3>
+                            <span class="manufacturer">Manufacturer: Pfizer Inc.</span>
+                            <div class="product-actions">
+                                <button class="request-quote">Request Quote</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 2 -->
+                    <div class="product-card" data-category="pharmaceuticals" data-id="insulin">
+                        <div class="product-badge">Rx</div>
+                        <div class="product-img">
+                            <i class="fas fa-syringe" style="font-size: 4rem; color: var(--primary);"></i>
+                        </div>
+                        <div class="product-info">
+                            <h3>Insulin Glargine</h3>
+                            <span class="manufacturer">Manufacturer: Sanofi</span>
+                            <div class="product-actions">
+                                <button class="request-quote">Request Quote</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 3 -->
+                    <div class="product-card" data-category="equipment" data-id="monitor">
+                        <div class="product-img">
+                            <i class="fas fa-heartbeat" style="font-size: 4rem; color: var(--primary);"></i>
+                        </div>
+                        <div class="product-info">
+                            <h3>Patient Monitor</h3>
+                            <span class="manufacturer">Manufacturer: Philips Healthcare</span>
+                            <div class="product-actions">
+                                <button class="request-quote">Request Quote</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 4 -->
+                    <div class="product-card" data-category="consumables" data-id="masks">
+                        <div class="product-img">
+                            <i class="fas fa-mask-face" style="font-size: 4rem; color: var(--primary);"></i>
+                        </div>
+                        <div class="product-info">
+                            <h3>Surgical Masks</h3>
+                            <span class="manufacturer">Manufacturer: 3M</span>
+                            <div class="product-actions">
+                                <button class="request-quote">Request Quote</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 5 -->
+                    <div class="product-card" data-category="pharmaceuticals" data-id="amoxicillin">
+                        <div class="product-badge">Rx</div>
+                        <div class="product-img">
+                            <i class="fas fa-capsules" style="font-size: 4rem; color: var(--primary);"></i>
+                        </div>
+                        <div class="product-info">
+                            <h3>Amoxicillin Capsules</h3>
+                            <span class="manufacturer">Manufacturer: Sandoz</span>
+                            <div class="product-actions">
+                                <button class="request-quote">Request Quote</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 6 -->
+                    <div class="product-card" data-category="equipment" data-id="hospital-bed">
+                        <div class="product-img">
+                            <i class="fas fa-procedures" style="font-size: 4rem; color: var(--primary);"></i>
+                        </div>
+                        <div class="product-info">
+                            <h3>Hospital Bed</h3>
+                            <span class="manufacturer">Manufacturer: Hill-Rom</span>
+                            <div class="product-actions">
+                                <button class="request-quote">Request Quote</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Product Detail Sections -->
+        <div class="product-detail" id="atorvastatin-detail">
+            <div class="product-detail-container">
+                <div class="product-detail-img">
+                    <i class="fas fa-pills"></i>
+                </div>
+                <div class="product-detail-info">
+                    <h2>Atorvastatin Calcium</h2>
+                    <span class="manufacturer">Manufacturer: Pfizer Inc.</span>
+                    <div class="description">
+                        <p>Atorvastatin is used along with a proper diet to help lower "bad" cholesterol and fats (such as LDL, triglycerides) and raise "good" cholesterol (HDL) in the blood. It belongs to a group of drugs known as "statins." It works by reducing the amount of cholesterol made by the liver.</p>
+                        <p>This product is available in 10mg, 20mg, 40mg, and 80mg tablets. Minimum order quantity applies.</p>
+                    </div>
+                    <button class="request-quote btn-primary" style="padding: 0.8rem 1.5rem;">Request Quote</button>
+                    <button class="back-btn">Back to Products</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="product-detail" id="insulin-detail">
+            <div class="product-detail-container">
+                <div class="product-detail-img">
+                    <i class="fas fa-syringe"></i>
+                </div>
+                <div class="product-detail-info">
+                    <h2>Insulin Glargine</h2>
+                    <span class="manufacturer">Manufacturer: Sanofi</span>
+                    <div class="description">
+                        <p>Insulin glargine is a long-acting insulin used to control high blood sugar in adults and children with diabetes mellitus. It starts working several hours after injection and keeps working evenly for 24 hours.</p>
+                        <p>Available in 10mL vials (100 units/mL) and 3mL prefilled pens. Requires prescription and proper storage conditions.</p>
+                    </div>
+                    <button class="request-quote btn-primary" style="padding: 0.8rem 1.5rem;">Request Quote</button>
+                    <button class="back-btn">Back to Products</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="product-detail" id="monitor-detail">
+            <div class="product-detail-container">
+                <div class="product-detail-img">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <div class="product-detail-info">
+                    <h2>Patient Monitor</h2>
+                    <span class="manufacturer">Manufacturer: Philips Healthcare</span>
+                    <div class="description">
+                        <p>Advanced patient monitoring system with 12.1" high-resolution touchscreen display. Monitors ECG, SpO2, NIBP, temperature, and more. Features include:</p>
+                        <ul>
+                            <li>Multi-parameter monitoring</li>
+                            <li>Arrhythmia detection</li>
+                            <li>Trend analysis</li>
+                            <li>Network connectivity</li>
+                        </ul>
+                        <p>Ideal for hospitals, clinics, and critical care units.</p>
+                    </div>
+                    <button class="request-quote btn-primary" style="padding: 0.8rem 1.5rem;">Request Quote</button>
+                    <button class="back-btn">Back to Products</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="product-detail" id="masks-detail">
+            <div class="product-detail-container">
+                <div class="product-detail-img">
+                    <i class="fas fa-mask-face"></i>
+                </div>
+                <div class="product-detail-info">
+                    <h2>Surgical Masks</h2>
+                    <span class="manufacturer">Manufacturer: 3M</span>
+                    <div class="description">
+                        <p>High-quality 3-ply surgical masks with the following features:</p>
+                        <ul>
+                            <li>Fluid-resistant outer layer</li>
+                            <li>Bacterial filtration efficiency ≥ 95%</li>
+                            <li>Breathable material</li>
+                            <li>Comfortable ear loops</li>
+                            <li>Adjustable nose bridge</li>
+                        </ul>
+                        <p>Available in boxes of 50 or 100 masks. Bulk discounts available for large orders.</p>
+                    </div>
+                    <button class="request-quote btn-primary" style="padding: 0.8rem 1.5rem;">Request Quote</button>
+                    <button class="back-btn">Back to Products</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="product-detail" id="amoxicillin-detail">
+            <div class="product-detail-container">
+                <div class="product-detail-img">
+                    <i class="fas fa-capsules"></i>
+                </div>
+                <div class="product-detail-info">
+                    <h2>Amoxicillin Capsules</h2>
+                    <span class="manufacturer">Manufacturer: Sandoz</span>
+                    <div class="description">
+                        <p>Amoxicillin is a penicillin antibiotic that fights bacteria. It is used to treat many different types of infection caused by bacteria, such as tonsillitis, bronchitis, pneumonia, and infections of the ear, nose, throat, skin, or urinary tract.</p>
+                        <p>Available in 250mg and 500mg capsules. Pack sizes of 100, 500, and 1000 capsules. Requires prescription.</p>
+                    </div>
+                    <button class="request-quote btn-primary" style="padding: 0.8rem 1.5rem;">Request Quote</button>
+                    <button class="back-btn">Back to Products</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="product-detail" id="hospital-bed-detail">
+            <div class="product-detail-container">
+                <div class="product-detail-img">
+                    <i class="fas fa-procedures"></i>
+                </div>
+                <div class="product-detail-info">
+                    <h2>Hospital Bed</h2>
+                    <span class="manufacturer">Manufacturer: Hill-Rom</span>
+                    <div class="description">
+                        <p>Premium electric hospital bed with full functionality:</p>
+                        <ul>
+                            <li>Three-section articulating deck</li>
+                            <li>Electric height adjustment</li>
+                            <li>Trendelenburg and reverse Trendelenburg</li>
+                            <li>Integrated side rails</li>
+                            <li>IV pole holder</li>
+                            <li>Weight capacity: 500 lbs</li>
+                        </ul>
+                        <p>Available in multiple sizes and configurations. Delivery and setup services available.</p>
+                    </div>
+                    <button class="request-quote btn-primary" style="padding: 0.8rem 1.5rem;">Request Quote</button>
+                    <button class="back-btn">Back to Products</button>
+                </div>
+            </div>
+        </div>
+        
+        <section class="partner-logos">
+            <h2 class="section-title">Trusted Partners</h2>
+            <div class="logos-container">
+                <div class="logo-item">
+                    <i class="fas fa-hospital" style="font-size: 3rem; color: var(--primary);"></i>
+                </div>
+                <div class="logo-item">
+                    <i class="fas fa-clinic-medical" style="font-size: 3rem; color: var(--primary);"></i>
+                </div>
+                <div class="logo-item">
+                    <i class="fas fa-prescription-bottle-alt" style="font-size: 3rem; color: var(--primary);"></i>
+                </div>
+                <div class="logo-item">
+                    <i class="fas fa-ambulance" style="font-size: 3rem; color: var(--primary);"></i>
+                </div>
+                <div class="logo-item">
+                    <i class="fas fa-user-md" style="font-size: 3rem; color: var(--primary);"></i>
+                </div>
+            </div>
+        </section>
+        
+        <section class="contact-cta" id="contact">
+            <h2>Ready to Partner With Us?</h2>
+            <p>Contact our sales team today to discuss your pharmaceutical distribution needs and request a product catalog.</p>
+            <button class="btn btn-primary" id="contactSalesBtn">Contact Sales</button>
+            <button class="btn btn-outline" id="requestCatalogBtn">Request Catalog</button>
+        </section>
+    </main>
+    
+    <!-- Quote Request Modal -->
+    <div id="quoteModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Request a Quote</h2>
+            <form id="quoteForm">
+                <input type="hidden" id="productId" name="productId" value="">
+                <input type="hidden" id="productName" name="productName" value="">
+                
+                <div class="form-group">
+                    <label for="name">Full Name*</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="company">Company Name*</label>
+                    <input type="text" id="company" name="company" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address*</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number*</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="businessType">Type of Business*</label>
+                    <select id="businessType" name="businessType" required>
+                        <option value="">Select...</option>
+                        <option value="hospital">Hospital</option>
+                        <option value="clinic">Clinic</option>
+                        <option value="pharmacy">Pharmacy</option>
+                        <option value="distributor">Distributor</option>
+                        <option value="Personal Order">Personal Use</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="quantity">Estimated Quantity Needed</label>
+                    <input type="text" id="quantity" name="quantity">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Additional Information</label>
+                    <textarea id="message" name="message"></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Submit Request</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Contact Sales Modal -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Contact Our Sales Team</h2>
+            <form id="contactForm" action="process_contact.php" method="POST">
+                <div class="form-group">
+                    <label for="contactName">Full Name*</label>
+                    <input type="text" id="contactName" name="contactName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contactCompany">Company Name*</label>
+                    <input type="text" id="contactCompany" name="contactCompany" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contactEmail">Email Address*</label>
+                    <input type="email" id="contactEmail" name="contactEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contactPhone">Phone Number*</label>
+                    <input type="tel" id="contactPhone" name="contactPhone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contactBusinessType">Type of Business*</label>
+                    <select id="contactBusinessType" name="contactBusinessType" required>
+                        <option value="">Select...</option>
+                        <option value="hospital">Hospital</option>
+                        <option value="clinic">Clinic</option>
+                        <option value="pharmacy">Pharmacy</option>
+                        <option value="distributor">Distributor</option>
+                        <option value="other">Other Healthcare Provider</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contactSubject">Subject*</label>
+                    <input type="text" id="contactSubject" name="contactSubject" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contactMessage">Your Message*</label>
+                    <textarea id="contactMessage" name="contactMessage" required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Catalog Request Modal -->
+    <div id="catalogModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Request Our Product Catalog</h2>
+            <form id="catalogForm">
+                <div class="form-group">
+                    <label for="catalogName">Full Name*</label>
+                    <input type="text" id="catalogName" name="catalogName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="catalogCompany">Company Name*</label>
+                    <input type="text" id="catalogCompany" name="catalogCompany" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="catalogEmail">Email Address*</label>
+                    <input type="email" id="catalogEmail" name="catalogEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="catalogPhone">Phone Number</label>
+                    <input type="tel" id="catalogPhone" name="catalogPhone">
+                </div>
+                
+                <div class="form-group">
+                    <label for="catalogBusinessType">Type of Business*</label>
+                    <select id="catalogBusinessType" name="catalogBusinessType" required>
+                        <option value="">Select...</option>
+                        <option value="hospital">Hospital</option>
+                        <option value="clinic">Clinic</option>
+                        <option value="pharmacy">Pharmacy</option>
+                        <option value="distributor">Distributor</option>
+                        <option value="other">Other Healthcare Provider</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="catalogDelivery">Preferred Delivery Method*</label>
+                    <select id="catalogDelivery" name="catalogDelivery" required>
+                        <option value="">Select...</option>
+                        <option value="email">Email (PDF)</option>
+                        <option value="physical">Physical Copy</option>
+                        <option value="both">Both</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="submit-btn">Request Catalog</button>
+            </form>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>J.Care MedPartners</h3>
+                <p>Your trusted wholesale distributor of pharmaceuticals and medical supplies in Quezon City, Philippines.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#" class="nav-home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Product Categories</h3>
+                <ul>
+                    <li><a href="#products">Parenteral Medicines</a></li>
+                    <li><a href="#products">Oral Medicines</a></li>
+                    <li><a href="#products">Medical Equipment</a></li>
+                    <li><a href="#products">Medical Consumables</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <p><i class="fas fa-map-marker-alt"></i> Quezon City, Philippines</p>
+                    <p><i class="fas fa-phone"></i> +63 916 426 2158</p>
+                    <p><i class="fas fa-envelope"></i> sales@jcaremedpartners.com</p>
+                    <p><i class="fas fa-clock"></i> Mon-Fri: 8:00 AM - 5:00 PM</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 J.Care MedPartners. All Rights Reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+    
+    <script>
+        // Sample product data for search functionality
+        const products = [
+            {
+                id: "atorvastatin",
+                name: "Atorvastatin Calcium",
+                category: "pharmaceuticals",
+                manufacturer: "Pfizer Inc.",
+                type: "Rx",
+                description: "Atorvastatin is used along with a proper diet to help lower bad cholesterol and fats and raise good cholesterol in the blood. Available in 10mg, 20mg, 40mg, and 80mg tablets."
+            },
+            {
+                id: "insulin",
+                name: "Insulin Glargine",
+                category: "pharmaceuticals",
+                manufacturer: "Sanofi",
+                type: "Rx",
+                description: "Long-acting insulin used to control high blood sugar in adults and children with diabetes mellitus. Available in 10mL vials (100 units/mL) and 3mL prefilled pens."
+            },
+            {
+                id: "monitor",
+                name: "Patient Monitor",
+                category: "equipment",
+                manufacturer: "Philips Healthcare",
+                type: "Medical Equipment",
+                description: "Advanced patient monitoring system with 12.1\" high-resolution touchscreen display. Monitors ECG, SpO2, NIBP, temperature, and more."
+            },
+            {
+                id: "masks",
+                name: "Surgical Masks",
+                category: "consumables",
+                manufacturer: "3M",
+                type: "Medical Supplies",
+                description: "High-quality 3-ply surgical masks with fluid-resistant outer layer and bacterial filtration efficiency ≥ 95%. Available in boxes of 50 or 100 masks."
+            },
+            {
+                id: "amoxicillin",
+                name: "Amoxicillin Capsules",
+                category: "pharmaceuticals",
+                manufacturer: "Sandoz",
+                type: "Rx",
+                description: "Penicillin antibiotic used to treat many different types of infection caused by bacteria. Available in 250mg and 500mg capsules."
+            },
+            {
+                id: "hospital-bed",
+                name: "Hospital Bed",
+                category: "equipment",
+                manufacturer: "Hill-Rom",
+                type: "Medical Equipment",
+                description: "Premium electric hospital bed with full functionality including three-section articulating deck, electric height adjustment, and integrated side rails."
+            }
+        ];
+
+        // DOM Elements
+        const mainContent = document.getElementById('main-content');
+        const productDetails = document.querySelectorAll('.product-detail');
+        const backButtons = document.querySelectorAll('.back-btn');
+        const navHome = document.querySelector('.nav-home');
+        const viewProductsBtn = document.getElementById('viewProductsBtn');
+        
+        // Modal elements
+        const quoteModal = document.getElementById('quoteModal');
+        const contactModal = document.getElementById('contactModal');
+        const catalogModal = document.getElementById('catalogModal');
+        const closeBtns = document.querySelectorAll('.close-btn');
+        const quoteForm = document.getElementById('quoteForm');
+        const contactForm = document.getElementById('contactForm');
+        const catalogForm = document.getElementById('catalogForm');
+        const becomePartnerBtn = document.getElementById('becomePartnerBtn');
+        const contactSalesBtn = document.getElementById('contactSalesBtn');
+        const requestCatalogBtn = document.getElementById('requestCatalogBtn');
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            
+            if (searchTerm.length < 2) {
+                searchResults.classList.remove('active');
+                return;
+            }
+            
+            const filteredProducts = products.filter(product => 
+                product.name.toLowerCase().includes(searchTerm) || 
+                product.manufacturer.toLowerCase().includes(searchTerm) ||
+                product.type.toLowerCase().includes(searchTerm)
+            );
+            
+            displaySearchResults(filteredProducts);
+        });
+
+        function displaySearchResults(results) {
+            if (results.length === 0) {
+                searchResults.innerHTML = '<div class="search-item">No products found</div>';
+                searchResults.classList.add('active');
+                return;
+            }
+            
+            searchResults.innerHTML = '';
+            results.forEach(product => {
+                const item = document.createElement('div');
+                item.className = 'search-item';
+                item.innerHTML = `
+                    <h4>${product.name}</h4>
+                    <p>${product.type} • ${product.manufacturer}</p>
+                `;
+                item.addEventListener('click', function() {
+                    showProductDetail(product.id);
+                    searchInput.value = '';
+                    searchResults.classList.remove('active');
+                });
+                searchResults.appendChild(item);
+            });
+            
+            searchResults.classList.add('active');
+        }
+
+        // Close search results when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!searchResults.contains(e.target) && e.target !== searchInput) {
+                searchResults.classList.remove('active');
+            }
+        });
+
+        // Product filtering
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const productCards = document.querySelectorAll('.product-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Update active button
+                filterBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filter = this.dataset.filter;
+                
+                // Filter products
+                productCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Show product detail
+        function showProductDetail(productId) {
+            // Hide main content
+            mainContent.style.display = 'none';
+            
+            // Show the selected product detail
+            document.getElementById(`${productId}-detail`).classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Back to products
+        backButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Hide all product details
+                productDetails.forEach(detail => {
+                    detail.classList.remove('active');
+                });
+                
+                // Show main content
+                mainContent.style.display = 'block';
+                
+                // Scroll to products section
+                document.getElementById('products').scrollIntoView();
+            });
+        });
+
+        // Navigation home
+        navHome.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Hide all product details
+            productDetails.forEach(detail => {
+                detail.classList.remove('active');
+            });
+            
+            // Show main content
+            mainContent.style.display = 'block';
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        });
+
+        // View products button
+        viewProductsBtn.addEventListener('click', function() {
+            // Hide all product details
+            productDetails.forEach(detail => {
+                detail.classList.remove('active');
+            });
+            
+            // Show main content
+            mainContent.style.display = 'block';
+            
+            // Scroll to products section
+            document.getElementById('products').scrollIntoView();
+        });
+
+        // Modal functionality
+        function openModal(modal) {
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Quote request buttons
+        const quoteBtns = document.querySelectorAll('.request-quote');
+        
+        quoteBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                let productName, productId;
+                
+                if (this.closest('.product-card')) {
+                    // From product grid
+                    productName = this.closest('.product-card').querySelector('h3').textContent;
+                    productId = this.closest('.product-card').dataset.id;
+                } else {
+                    // From product detail
+                    productName = this.closest('.product-detail-info').querySelector('h2').textContent;
+                    productId = this.closest('.product-detail').id.replace('-detail', '');
+                }
+                
+                // Set product info in form
+                document.getElementById('productId').value = productId;
+                document.getElementById('productName').value = productName;
+                
+                // Open modal
+                openModal(quoteModal);
+            });
+        });
+
+        // Contact sales button
+        contactSalesBtn.addEventListener('click', function() {
+            openModal(contactModal);
+        });
+
+        // Become partner button
+        becomePartnerBtn.addEventListener('click', function() {
+            openModal(contactModal);
+        });
+
+        // Request catalog button
+        requestCatalogBtn.addEventListener('click', function() {
+            openModal(catalogModal);
+        });
+
+        // Close buttons
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const modal = this.closest('.modal');
+                closeModal(modal);
+            });
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                closeModal(e.target);
+            }
+        });
+
+        // Form submissions
+        quoteForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            
+            // In a real implementation, you would send this data to your server
+            console.log('Quote request submitted:', data);
+            
+            // Show confirmation
+            alert(`Thank you for your quote request for ${data.productName}. Our sales team will contact you shortly at ${data.email} or ${data.phone}.`);
+            
+            // Close modal and reset form
+            closeModal(quoteModal);
+            this.reset();
+        });
+
+// Replace your current contactForm event listener with this:
+contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Get form data
+    const formData = new FormData(this);
+    
+    // Show loading state
+    const submitBtn = this.querySelector('.submit-btn');
+    const originalBtnText = submitBtn.textContent;
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
+    
+    // Send form data via AJAX
+    fetch(this.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Show success message
+            alert(data.message);
+            
+            // Close modal and reset form
+            closeModal(contactModal);
+            this.reset();
+        } else {
+            // Show error message(s)
+            if (data.errors) {
+                alert('Please fix the following errors:\n\n' + data.errors.join('\n'));
+            } else {
+                alert(data.message || 'There was an error submitting your form. Please try again.');
+            }
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('There was an error submitting your form. Please try again.');
+    })
+    .finally(() => {
+        // Reset button state
+        submitBtn.textContent = originalBtnText;
+        submitBtn.disabled = false;
+    });
+});
+
+        catalogForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            
+            // In a real implementation, you would send this data to your server
+            console.log('Catalog request submitted:', data);
+            
+            // Show confirmation
+            let deliveryMethod = '';
+            switch(data.catalogDelivery) {
+                case 'email':
+                    deliveryMethod = 'via email';
+                    break;
+                case 'physical':
+                    deliveryMethod = 'as a physical copy';
+                    break;
+                case 'both':
+                    deliveryMethod = 'both via email and as a physical copy';
+                    break;
+            }
+            
+            alert(`Thank you for your catalog request, ${data.catalogName}. We will send our product catalog ${deliveryMethod} to ${data.catalogEmail}.`);
+            
+            // Close modal and reset form
+            closeModal(catalogModal);
+            this.reset();
+        });
+
+        // Initialize - show main content, hide product details
+        mainContent.style.display = 'block';
+        productDetails.forEach(detail => {
+            detail.classList.remove('active');
+        });
+
+         // New Order Functionality
+        const orderModal = document.getElementById('orderModal');
+        const orderForm = document.getElementById('orderForm');
+        const orderSummary = document.getElementById('orderSummary');
+        
+        // Function to open order modal with product info
+        function openOrderModal(productId, productName) {
+            document.getElementById('orderProductId').value = productId;
+            document.getElementById('orderProductName').value = productName;
+            
+            // Update order summary
+            orderSummary.innerHTML = `
+                <h4>Order Summary</h4>
+                <p><strong>Product:</strong> ${productName}</p>
+                <p><strong>Price:</strong> <span id="orderPrice">(Will be quoted)</span></p>
+            `;
+            
+            openModal(orderModal);
+        }
+        
+        // Update order buttons to use the new modal
+        document.querySelectorAll('.request-quote').forEach(btn => {
+            btn.addEventListener('click', function() {
+                let productName, productId;
+                
+                if (this.closest('.product-card')) {
+                    productName = this.closest('.product-card').querySelector('h3').textContent;
+                    productId = this.closest('.product-card').dataset.id;
+                } else {
+                    productName = this.closest('.product-detail-info').querySelector('h2').textContent;
+                    productId = this.closest('.product-detail').id.replace('-detail', '');
+                }
+                
+                openOrderModal(productId, productName);
+            });
+        });
+        
+        // Order form submission
+        orderForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            
+            // In production, you would send this to your server
+            console.log('Order submitted:', data);
+            
+            // Here you would typically:
+            // 1. Validate the data
+            // 2. Send to your server (PHP script, database, etc.)
+            // 3. Process payment if applicable
+            // 4. Send confirmation emails
+            
+            // For demo purposes, we'll just show an alert
+            alert(`Thank you for your order, ${data.name}!\n\n` +
+                  `We have received your order for ${data.quantity} units of ${data.product_name}.\n` +
+                  `Our sales team will contact you shortly at ${data.email} or ${data.phone} to confirm.`);
+            
+            // Close modal and reset form
+            closeModal(orderModal);
+            this.reset();
+        });
+        
+        // Initialize as before
+        mainContent.style.display = 'block';
+        productDetails.forEach(detail => {
+            detail.classList.remove('active');
+        });
+    </script>
+</body>
+</html>
